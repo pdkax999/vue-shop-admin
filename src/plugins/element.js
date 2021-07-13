@@ -13,8 +13,19 @@ import {
   Submenu,
   MenuItem,
   MenuItemGroup,
+  Breadcrumb,
+  BreadcrumbItem,
+  Table,
+  Switch,
+  TableColumn,
+  Popover,
+  Pagination
 } from 'element-ui'
-
+Vue.use(Pagination);
+Vue.use(Popover)
+Vue.use(Switch)
+Vue.use(Breadcrumb)
+Vue.use( BreadcrumbItem)
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
@@ -27,4 +38,7 @@ Vue.use(Menu);
 Vue.use(Submenu);
 Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
+Vue.use(Table);
+Vue.use(TableColumn);
+
 Vue.prototype.$message = Message

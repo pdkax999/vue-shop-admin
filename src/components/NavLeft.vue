@@ -64,8 +64,6 @@ export default {
         })
 
         if (result) {
-         
-
           this.avtiveId = result.id + ''
           return
         }

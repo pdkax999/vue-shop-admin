@@ -29,10 +29,12 @@ instance.interceptors.response.use((response) => {
   let data = response.data
 
   if (data.meta.status == 200) {
-    Message({
-      message: data.meta.msg,
-      type: 'success'
-    });
+    if (data.meta.msg == "登录成功") {
+      Message({
+        message: data.meta.msg,
+        type: 'success'
+      });
+    }
     return data.data
   } else if (data.meta.status == 400) {
 

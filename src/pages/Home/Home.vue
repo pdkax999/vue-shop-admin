@@ -56,9 +56,13 @@ export default {
       cursor:pointer;
     }
   }
+  .el-menu{
+    border-right:none ;
+  }
 }
 
 .el-header {
+  width: 100%;
   background-color: #373d41;
   color: #fff;
   line-height: 60px;
@@ -88,10 +92,12 @@ export default {
   color: #fff;
   text-align: center;
   height: 100%;
+  overflow: hidden;
 }
 
 .el-main {
   color: #fff;
   background-color: #EAEDF1;
 }
+
 </style>

@@ -2,27 +2,59 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../pages/Login/Login.vue'
 import Home from '../pages/Home/Home.vue'
+import Welcome from "../pages/Home/Welcome.vue";
+import Users from "../pages/Users/Users.vue";
+import Roles from "../pages/Roles/Roles.vue";
 
 Vue.use(Router)
 
 const router = new Router({
-  routes: [
-    { path: '/', redirect: '/login' },
-    { path: '/login', component: Login },
-    { path: '/home', component: Home }
+  routes: [{
+      path: '/',
+      redirect: '/login'
+    },
+    {
+      path: '/login',
+      component: Login
+    },
+    {
+      path: '/',
+      component: Home,
+      children: [
+        {
+          path: '/',
+          redirect: '/welcome'
+        },
+        {
+        path: 'welcome',
+        component: Welcome
+
+      },
+        {
+        path: 'users',
+        component: Users
+
+      },
+        {
+        path: 'roles',
+        component: Roles
+      }
+    ]
+
+    }
   ]
 })
 
 
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to, from, next) => {
 
 
-  if(to.path === '/login') next()
+  if (to.path === '/login') next()
 
   const tokenStr = window.sessionStorage.getItem('token_key');
-   
-  if(!tokenStr) return next('/login')
-  
+
+  if (!tokenStr) return next('/login')
+
   next()
 })
 

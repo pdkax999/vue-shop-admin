@@ -56,8 +56,8 @@ export default {
         if(!result) return  
 
         window.sessionStorage.setItem('token_key',result.token)
-        
-        this.$router.replace('/home');
+       
+        this.$router.replace('/welcome');
         
       })
     },

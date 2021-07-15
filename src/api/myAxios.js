@@ -29,10 +29,13 @@ instance.interceptors.response.use((response) => {
   let data = response.data
 
   if (data.meta.status == 200) {
-    if (data.meta.msg == "登录成功") {
+    
+
+    if (["登录成功", "设置状态成功","更新成功",'删除成功','设置角色成功'].includes(data.meta.msg)) {
       Message({
         message: data.meta.msg,
-        type: 'success'
+        type: 'success',
+        duration: 1000
       });
     }
     return data.data

@@ -19,8 +19,15 @@ import {
   Switch,
   TableColumn,
   Popover,
-  Pagination
+  Pagination,
+  Dialog,
+  MessageBox,
+  Select,
+  Option
 } from 'element-ui'
+Vue.use(Dialog);
+Vue.use(Option);
+Vue.use(Select);
 Vue.use(Pagination);
 Vue.use(Popover)
 Vue.use(Switch)
@@ -42,3 +49,4 @@ Vue.use(Table);
 Vue.use(TableColumn);
 
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm 

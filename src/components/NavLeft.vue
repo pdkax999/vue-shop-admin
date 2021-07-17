@@ -2,8 +2,7 @@
   <div id="menuList">
     <el-menu
       class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
+      router
       background-color="#333744"
       text-color="#fff"
       active-text-color="#409EFF"
@@ -17,10 +16,9 @@
           <span class="left">{{menu.authName}}</span>
         </template>
         <el-menu-item
-          :index="MenuChil.id+''"
+          :index="'/'+MenuChil.path"
           v-for="(MenuChil) in menu.children"
           :key="MenuChil.id"
-          @click="$router.push(MenuChil.path)"
         >
           <span slot="title">{{MenuChil.authName}}</span>
           <i class="el-icon-menu"></i>
@@ -33,12 +31,6 @@
 <script type="text/ecmascript-6">
 export default {
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath)
-    },
     async getMenu() {
       const result = await this.$API.reqMenuList()
       if (!result) return
@@ -56,22 +48,28 @@ export default {
       })
     },
     initActive() {
-      const { powerList } = this
-      let result
-      for (let i = 0; i < powerList.length; i++) {
-        result = powerList[i].children.find(menuChild => {
-          return this.$route.path.indexOf(menuChild.path) !== -1
-        })
+      // const { powerList } = this
+      // let result
+      // for (let i = 0; i < powerList.length; i++) {
+      //   result = powerList[i].children.find(menuChild => {
+      //     return this.$route.path.indexOf(menuChild.path) !== -1
+      //   })
 
-        if (result) {
-          this.avtiveId = result.id + ''
-          return
-        }
-      }
-    }
+      //   if (result) {
+      //     this.avtiveId = result.id + ''
+      //     return
+      //   }
+      // }
+      let path = this.$route.path
+      this.avtiveId=path
+      
+    },
+    
   },
   mounted() {
     this.getMenu()
+    this.initActive()
+    
   },
   data() {
     return {
@@ -85,11 +83,6 @@ export default {
       default: false
     }
   },
-  watch: {
-    powerList() {
-      this.initActive()
-    }
-  }
 }
 </script>
 

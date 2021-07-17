@@ -26,6 +26,7 @@ import NavLeft from "../../components/NavLeft.vue";
 export default {
   methods: {
     logout() {
+      
       window.sessionStorage.clear()
       this.$router.replace('/login')
     },
@@ -62,6 +63,7 @@ export default {
 }
 
 .el-header {
+  flex-shrink: 0;
   width: 100%;
   background-color: #373d41;
   padding-left:0 !important;
@@ -85,7 +87,9 @@ export default {
 }
 
 .el-container {
+  width: 100%;
   height: 100%;
+
 }
 
 .el-aside {

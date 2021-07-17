@@ -66,7 +66,6 @@ export default {
   },
   mounted() {
     this.getRoleList()
-
     this.$on('getUserInfo', ({ id, username, role_name }) => {
       this.id = id
       this.role_name = role_name

@@ -7,11 +7,15 @@
       <div id="form">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
           <el-form-item prop="username">
-            <el-input v-model="ruleForm.username"  prefix-icon="iconfont icon-user"></el-input>
+            <el-input v-model="ruleForm.username" prefix-icon="iconfont icon-user"></el-input>
           </el-form-item>
-          
+
           <el-form-item prop="password">
-            <el-input v-model="ruleForm.password"  type="password"  prefix-icon="iconfont icon-3702mima"></el-input>
+            <el-input
+              v-model="ruleForm.password"
+              type="password"
+              prefix-icon="iconfont icon-3702mima"
+            ></el-input>
           </el-form-item>
 
           <el-form-item>
@@ -23,7 +27,6 @@
     </div>
   </div>
 </template>
-
 <script type="text/ecmascript-6">
 export default {
   data() {
@@ -37,31 +40,31 @@ export default {
           { required: true, message: '请输入登录名称', trigger: 'blur' },
           { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
         ],
-         password:[
-           {required: true, message: '请输入登录密码', trigger: 'blur'},
-           { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
-         ]
+        password: [
+          { required: true, message: '请输入登录密码', trigger: 'blur' },
+          { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+        ]
       }
     }
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate( async valid => {
-        if (!valid) return 
+      this.$refs[formName].validate(async valid => {
+        if (!valid) return
 
-        const {username,password} = this.ruleForm
-         
-        const result = await this.$API.reqPwdLogin(username,password)
+        const { username, password } = this.ruleForm
 
-        if(!result) return  
+        const result = await this.$API.reqPwdLogin(username, password)
 
-        window.sessionStorage.setItem('token_key',result.token)
-       
-        this.$router.replace('/welcome');
-        
+        if (!result) return
+
+        window.sessionStorage.setItem('token_key', result.token)
+
+        this.$router.replace('/welcome')
       })
     },
     resetForm(formName) {
+      
       this.$refs[formName].resetFields()
     }
   }
@@ -118,7 +121,7 @@ export default {
     box-sizing: border-box;
     padding: 0 20px;
 
-    .el-form-item__content{
+    .el-form-item__content {
       text-align: right;
     }
   }

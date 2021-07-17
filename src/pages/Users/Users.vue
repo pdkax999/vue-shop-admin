@@ -2,7 +2,7 @@
   <div id="users">
     <div class="navigation">
       <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>首页</el-breadcrumb-item>
         <el-breadcrumb-item>用户管理</el-breadcrumb-item>
         <el-breadcrumb-item>用户列表</el-breadcrumb-item>
       </el-breadcrumb>
@@ -112,10 +112,7 @@ import AuthorUserRole from '../../components/AuthorUserRole.vue'
 export default {
   methods: {
     openAuthorRoleModel(data) {
-     
-
-      this.$refs.modelRole.$emit('getUserInfo',data) 
-
+      this.$refs.modelRole.$emit('getUserInfo', data)
       this.$refs.modelRole.isDisalogVisible()
     },
     async getUserList() {
@@ -150,13 +147,12 @@ export default {
 
       data.mg_state = result.mg_state == 0 ? false : true
 
-      console.log(result.mg_state)
     },
     handleClose(done) {
       this.$refs.form.resetFields()
       done()
-      this.form = {
-        // username: '',
+      this.form={
+        username: '',
         password: '',
         email: '',
         mobile: ''
@@ -170,7 +166,7 @@ export default {
 
         const { username, password, email, mobile, type } = this.form
 
-        if (this.type == 'add') {
+        if (type == 'add') {
           result = await this.$API.reqAddUser({
             username,
             password,
@@ -190,6 +186,12 @@ export default {
         }
 
         this.dialogFormVisible = false
+        this.form={
+        username: '',
+        password: '',
+        email: '',
+        mobile: ''
+      }
         if (!result) return
         this.getUserList()
       })
@@ -205,8 +207,8 @@ export default {
         }
         this.form.mobile = data.mobile
         this.form.email = data.email
+        this.form.username = data.username
       }
-
       this.dialogFormVisible = true
     },
     openDelete({ id }) {
@@ -309,8 +311,6 @@ export default {
     margin-bottom: 15px;
   }
   .container {
-    // height: 258px;
-
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;

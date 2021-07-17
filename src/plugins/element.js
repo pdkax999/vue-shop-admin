@@ -23,9 +23,19 @@ import {
   Dialog,
   MessageBox,
   Select,
-  Option
+  Option,
+  Card,
+  Tag,
+  Col,
+  Row,
+  Tree 
 } from 'element-ui'
 Vue.use(Dialog);
+Vue.use(Tree);
+Vue.use(Row);
+Vue.use(Col);
+Vue.use(Tag);
+Vue.use(Card);
 Vue.use(Option);
 Vue.use(Select);
 Vue.use(Pagination);

@@ -14,7 +14,13 @@ export const  reqUpdateUserRole =(id,rid)=> myAxios.put(`users/${id}/role`,{rid
 
 export const  reqRoleList =()=> myAxios.get('roles');
 
+export const  reqRightsList =(type)=> myAxios.get('rights/'+type);
+
 export const  reqDeleteUser =(id)=> myAxios.delete(`users/${id}`);
+
+export const  reqDeleteRoleAuth =(roleId,rightId)=> myAxios.delete(`roles/${roleId}/rights/${rightId}`);
+
+export const  reqRolesList =()=> myAxios.get(`/roles`);
 
 export const  reqAUpdateUserInfo =(id,mobile,email)=> {
   console.log(id);

@@ -9,6 +9,7 @@
       :unique-opened="true"
       :collapse="iscollapse"
       :default-active="avtiveId"
+      :collapse-transition="false"
     >
       <el-submenu :index="menu.id+''" v-for="(menu) in powerList" :key="menu.id">
         <template slot="title">

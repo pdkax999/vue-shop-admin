@@ -33,3 +33,4 @@ export const reqUserList =(pagenum,pagesize,query)=> myAxios.get('/users',{
     query,pagenum,pagesize
   }
 })
+export const  reqSetUserRigths =(roleId,rids)=> myAxios.post('roles/'+roleId+'/rights',{rids});

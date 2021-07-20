@@ -73,9 +73,9 @@
         </el-table-column>
       </el-table>
     </el-card>
-
-    <el-dialog :title="'分配权限'" :visible.sync="dialogFormVisible">
+    <el-dialog :title="'分配权限'" :visible.sync="dialogFormVisible" @close="closeModel">
       <el-tree
+        ref="tree"
         :data="data"
         show-checkbox
         node-key="id"
@@ -83,10 +83,9 @@
         :default-checked-keys="checked"
         :props="defaultProps"
       ></el-tree>
-
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible=false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible=false">确 定</el-button>
+        <el-button type="primary" @click="updateUserRigths">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -102,7 +101,8 @@ export default {
         children: 'children',
         label: 'authName'
       },
-      checked: [101]
+      checked: [],
+      idKey: ''
     }
   },
   methods: {
@@ -142,33 +142,47 @@ export default {
 
       if (!reslut) return
 
-      this.data = reslut
+      this.data = [...reslut]
     },
     openRigthsModel(data) {
-      this.getRights()
+      this.idKey = data.id
 
-      // this.checked = this.getPichRigths(data.children).flat(Infinity)
+      this.getRights()
+      this.getPichRigths(data, this.checked)
+     
 
       this.dialogFormVisible = true
     },
-    getPichRigths(data) {
-      let reslut = []
 
-      data.forEach(itme1 => {
-        reslut.push(itme1.id)
+    //注意
+    getPichRigths(data, arr) {
+      if (!data.children) {
+        return arr.push(data.id)
+      }
 
-        if (itme1.children) {
-          let val = this.getPichRigths(itme1.children)
+      data.children.forEach(ele => this.getPichRigths(ele, arr))
+    },
+    closeModel() {
+      this.$refs.tree.setCheckedKeys([])
+      
+    },
+    async updateUserRigths() {
+      let data = [
+        ...this.$refs.tree.getCheckedKeys(),
+        ...this.$refs.tree.getHalfCheckedKeys()
+      ].toString()
 
-          reslut.push(val)
-        }
-      })
+      let reslut = await this.$API.reqSetUserRigths(this.idKey, data)
 
-      return reslut
+      if (reslut !== null) return
+      this.getRolesList()
+
+      this.dialogFormVisible = false
     }
   },
   created() {
     this.getRolesList()
+    this.getRights()
   }
 }
 </script>

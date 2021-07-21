@@ -146,10 +146,8 @@ export default {
     },
     openRigthsModel(data) {
       this.idKey = data.id
-
       this.getRights()
       this.getPichRigths(data, this.checked)
-     
 
       this.dialogFormVisible = true
     },
@@ -164,7 +162,7 @@ export default {
     },
     closeModel() {
       this.$refs.tree.setCheckedKeys([])
-      
+      this.checked=[]
     },
     async updateUserRigths() {
       let data = [
@@ -176,7 +174,7 @@ export default {
 
       if (reslut !== null) return
       this.getRolesList()
-
+      this.checked=[]
       this.dialogFormVisible = false
     }
   },

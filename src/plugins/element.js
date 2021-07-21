@@ -28,9 +28,17 @@ import {
   Tag,
   Col,
   Row,
-  Tree 
+  Tree,
+  Cascader,
+  Alert,
+  Tabs,
+  TabPane
 } from 'element-ui'
+Vue.use(TabPane);
 Vue.use(Dialog);
+Vue.use(Tabs);
+Vue.use(Alert);
+Vue.use(Cascader);
 Vue.use(Tree);
 Vue.use(Row);
 Vue.use(Col);

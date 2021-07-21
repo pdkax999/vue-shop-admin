@@ -24,7 +24,7 @@ export const  reqRolesList =()=> myAxios.get(`/roles`);
 
 export const  reqAUpdateUserInfo =(id,mobile,email)=> {
   console.log(id);
-  
+
   return myAxios.put(`users/${id}`,{mobile,email})
 };
 
@@ -33,4 +33,25 @@ export const reqUserList =(pagenum,pagesize,query)=> myAxios.get('/users',{
     query,pagenum,pagesize
   }
 })
+export const reqParamsList =(id,sel)=> myAxios.get(`/categories/${id}/attributes`,{
+  params:{
+   sel
+  }
+})
 export const  reqSetUserRigths =(roleId,rids)=> myAxios.post('roles/'+roleId+'/rights',{rids});
+
+export const  reqAddUserRigths =(cat_pid,cat_name,cat_level)=> myAxios.post('/categories',{cat_pid,cat_name,cat_level});
+
+export const  reqGoodsCategorys =(pagenum,pagesize)=> myAxios.get('/categories',{
+
+  params:{
+    type:[1,2,3],
+    pagenum,
+    pagesize
+  }
+
+});
+
+export const  reqAddParams =(id,attr_name, attr_sel)=> myAxios.post(`/categories/${id}/attributes`,{attr_name, attr_sel});
+
+export const  reqUpdateParams =(id,attrId,attr_name, attr_sel)=> myAxios.put(`/categories/${id}/attributes/${attrId}`,{attr_name, attr_sel});

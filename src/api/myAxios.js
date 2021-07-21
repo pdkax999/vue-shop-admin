@@ -27,22 +27,23 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use((response) => {
 
   let data = response.data
-     
+
 
   if (data.meta.status == 200) {
 
-    if (["登录成功", "设置状态成功", "更新成功", '删除成功', '设置角色成功','取消权限成功'].includes(data.meta.msg)) {
+    if (["登录成功", "设置状态成功", "更新成功", '删除成功', '设置角色成功', '取消权限成功'].includes(data.meta.msg)) {
       Message({
         message: data.meta.msg,
         type: 'success',
         duration: 1000
       });
     }
-    
-    return data.data
-  
-  } else if (data.meta.status !== 200) {
 
+    return data.data
+
+  } else if (!(data.meta.status >= 200 && data.meta.status<300)) {
+   
+    
     Message.error(data.meta.msg)
 
     return new Promise(() => {})

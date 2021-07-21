@@ -146,12 +146,11 @@ export default {
       if (!result) return
 
       data.mg_state = result.mg_state == 0 ? false : true
-
     },
     handleClose(done) {
       this.$refs.form.resetFields()
       done()
-      this.form={
+      this.form = {
         username: '',
         password: '',
         email: '',
@@ -186,12 +185,12 @@ export default {
         }
 
         this.dialogFormVisible = false
-        this.form={
-        username: '',
-        password: '',
-        email: '',
-        mobile: ''
-      }
+        this.form = {
+          username: '',
+          password: '',
+          email: '',
+          mobile: ''
+        }
         if (!result) return
         this.getUserList()
       })

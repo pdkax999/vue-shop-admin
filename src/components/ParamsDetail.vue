@@ -15,10 +15,10 @@
         <template slot-scope="{row}">
           <el-tag
             :key="tag"
-            v-for="tag in row.attr_vals.length>0 ? row.attr_vals.split(' ') :[]"
+            v-for="tag in row.values"
             closable
             :disable-transitions="false"
-            @close="handleClose(tag)"
+            @close="handleClose(tag,row)"
           >{{tag}}</el-tag>
           <el-input
             class="input-new-tag"
@@ -116,21 +116,36 @@ export default {
       })
     },
     openModel(type, row) {
+      //修改或者添加
       this.type = type
-      this.attr_id = row.attr_id
-      console.log(row)
+
       if (type != 'add') {
         this.form.attr_name = row.attr_name
+        this.attr_id = row.attr_id
       }
       this.dialogVisible = true
     },
+    async handleClose(tag, row) {
+      const { attr_name, attr_id, values } = row
+      const { attr_sel, id } = this
 
-    handleClose(tag) {
-     
+      let newValue = JSON.parse(JSON.stringify(values))
+
+      newValue.splice(values.indexOf(tag), 1)
+
+      let value = newValue.join(' ')
+
+      let reslut = await this.$API.reqUpdateParams(
+        id,
+        attr_id,
+        attr_name,
+        attr_sel,
+        value
+      )
+      if (!reslut) return
+      values.splice(values.indexOf(tag), 1)
     },
-
     showInput(row) {
-      console.log(row)
       row.inputVisible = true
       this.$nextTick(() => {
         //页面展现之后自动获取焦点
@@ -138,11 +153,38 @@ export default {
       })
     },
 
-    handleInputConfirm(row) {
-      // let inputValue = this.inputValue;
-      // if (inputValue) {
-      //   this.dynamicTags.push(inputValue);
-      // }
+    async handleInputConfirm(row) {
+      const { attr_name, attr_id, values } = row
+      const { attr_sel, id } = this
+      let inputValue = this.inputValue
+      let newValue = JSON.parse(JSON.stringify(values))
+      if (!inputValue) {
+        row.inputVisible = false
+        this.inputValue = ''
+        return
+      } else if (newValue.indexOf(inputValue) !== -1) {
+        this.$message.warning('不能添加重复参数')
+        row.inputVisible = false
+        this.inputValue = ''
+        return
+      }
+
+      newValue.push(inputValue)
+
+      let value = newValue.join(' ')
+
+      let reslut = await this.$API.reqUpdateParams(
+        id,
+        attr_id,
+        attr_name,
+        attr_sel,
+        value
+      )
+
+      if (!reslut) return
+
+      values.push(inputValue)
+
       row.inputVisible = false
       this.inputValue = ''
     }
@@ -196,6 +238,11 @@ export default {
       type: 'add', //对话框复用
       inputVisible: false,
       inputValue: ''
+    }
+  },
+  watch: {
+    tableData(val) {
+      console.log(val)
     }
   }
 }

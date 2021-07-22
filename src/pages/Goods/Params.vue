@@ -26,13 +26,23 @@
         </el-col>
       </el-row>
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="动态属性" name="many" >
-          <params-detail text="参数" :tableData="manyData" attr_sel="many" :id="value[value.length-1]" 
-          :getParams="getParams"/>
+        <el-tab-pane label="动态属性" name="many">
+          <params-detail
+            text="参数"
+            :tableData="manyData"
+            attr_sel="many"
+            :id="value[value.length-1]"
+            :getParams="getParams"
+          />
         </el-tab-pane>
         <el-tab-pane label="静态属性" name="only">
-          <params-detail text="属性" :tableData="onlyData" attr_sel="only" :id="value[value.length-1]"
-          :getParams="getParams"/>
+          <params-detail
+            text="属性"
+            :tableData="onlyData"
+            attr_sel="only"
+            :id="value[value.length-1]"
+            :getParams="getParams"
+          />
         </el-tab-pane>
       </el-tabs>
     </el-card>
@@ -50,9 +60,7 @@ export default {
     handleChange() {
       this.getParams()
     },
-    handleClick(tab, event) {
-     
-    },
+    handleClick(tab, event) {},
     async getParams() {
       const { value, activeName } = this
       let reslut = await this.$API.reqParamsList(value[value.length - 1], [
@@ -61,20 +69,20 @@ export default {
       if (!reslut) return
 
       if (activeName == 'many') {
-
         this.manyData = this.produceNewDate(reslut)
       } else {
-        this.onlyData =this.produceNewDate(reslut)
+        this.onlyData = this.produceNewDate(reslut)
       }
     },
-    produceNewDate(data){
-     
-   return   this.tableData=data.map((info)=>{
-         info.inputVisible=false
+    produceNewDate(data) {
+      return (this.tableData = data.map(info => {
+        info.inputVisible = false
+        info.values= info.attr_vals.length>0 ? info.attr_vals.split(' ') :[]
+        // console.log(info.attr_vals.length,info.values= info.attr_vals.length>0 ? info.attr_vals.split(' ') :[]);
+        // console.log(info);
+        
         return info
-      })
-      
-      
+      }))
     }
   },
   data() {
@@ -91,11 +99,9 @@ export default {
   },
   watch: {
     activeName() {
-      
-      if(this.value.length>0){
-         this.getParams()
+      if (this.value.length > 0) {
+        this.getParams()
       }
-
     }
   }
 }

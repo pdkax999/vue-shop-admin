@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/router.js'
 
+import dayjs from "dayjs";
+
 import * as API  from "./api/index.js";
 
 import './plugins/element.js'
@@ -12,6 +14,7 @@ import  './assets/css/reset.css';
 // 导入全局样式表
 
 Vue.prototype.$API = API
+Vue.prototype.$dayjs = dayjs
 
 Vue.config.productionTip = false
 

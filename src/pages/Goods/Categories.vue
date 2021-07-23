@@ -65,6 +65,7 @@
             :options="categoryList"
             :props="{ expandTrigger: 'hover',label:`cat_name`,value: 'cat_id',checkStrictly: true}"
             @change="handleChange"
+            change-on-select
           ></el-cascader>
         </el-form-item>
       </el-form>

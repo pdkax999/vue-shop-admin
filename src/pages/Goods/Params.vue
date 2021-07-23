@@ -10,14 +10,13 @@
     <el-card>
       <el-row>
         <el-col :span="24">
-          <el-alert show-icon title="只允许为第三级分类设置相关参数！" type="warning"></el-alert>
+          <el-alert show-icon title="只允许为第三级分类设置相关参数！" type="warning" :closable="false"></el-alert>
         </el-col>
         <el-col>
           <span class="cate_text">选择商品分类:</span>
           <el-cascader
             ref="cascader"
             v-model="value"
-            clearable
             :style="{winth:'40%'}"
             :options="categoryList"
             :props="{ expandTrigger: 'hover',label:`cat_name`,value: 'cat_id'}"
@@ -60,8 +59,15 @@ export default {
     handleChange() {
       this.getParams()
     },
-    handleClick(tab, event) {},
+    handleClick(tab, event) {
+        this.getParams()
+    },
     async getParams() {
+      if (this.value.length !== 3) {
+        this.value = []
+        return
+      }
+
       const { value, activeName } = this
       let reslut = await this.$API.reqParamsList(value[value.length - 1], [
         activeName
@@ -77,10 +83,10 @@ export default {
     produceNewDate(data) {
       return (this.tableData = data.map(info => {
         info.inputVisible = false
-        info.values= info.attr_vals.length>0 ? info.attr_vals.split(' ') :[]
+        info.values = info.attr_vals.length > 0 ? info.attr_vals.split(' ') : []
         // console.log(info.attr_vals.length,info.values= info.attr_vals.length>0 ? info.attr_vals.split(' ') :[]);
         // console.log(info);
-        
+
         return info
       }))
     }
@@ -97,13 +103,13 @@ export default {
   components: {
     ParamsDetail
   },
-  watch: {
-    activeName() {
-      if (this.value.length > 0) {
-        this.getParams()
-      }
-    }
-  }
+  // watch: {
+  //   activeName() {
+  //     if (this.value.length > 0) {
+  //       this.getParams()
+  //     }
+  //   }
+  // }
 }
 </script>
 

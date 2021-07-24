@@ -60,10 +60,11 @@
         <el-form-item label="父级分类">
           <el-cascader
             ref="cascader"
+            expand-trigger="hover"
             v-model="value"
             clearable
             :options="categoryList"
-            :props="{ expandTrigger: 'hover',label:`cat_name`,value: 'cat_id',checkStrictly: true}"
+            :props="{ label:`cat_name`,value: 'cat_id',checkStrictly: true}"
             @change="handleChange"
             change-on-select
           ></el-cascader>

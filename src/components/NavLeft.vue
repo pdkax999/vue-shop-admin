@@ -61,7 +61,7 @@ export default {
       //     return
       //   }
       // }
-      let path = this.$route.path
+      let path = this.$route.path!== '/goods/add' ? this.$route.path : '/goods'
       this.avtiveId=path
       
     },

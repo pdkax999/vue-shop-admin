@@ -11,6 +11,7 @@ import Goods from "../pages/Goods/Goods.vue";
 import Params from "../pages/Goods/Params.vue";
 import Add from "../pages/Goods/Add.vue";
 
+
 Vue.use(Router)
 
 const router = new Router({
@@ -48,20 +49,20 @@ const router = new Router({
           component: Rights
         },
         {
-          path:'categories',
-          component:Categories
+          path: 'categories',
+          component: Categories
         },
         {
-          path:'params',
-          component:Params
+          path: 'params',
+          component: Params
         },
         {
-          path:'goods',
-          component:Goods,
-          children:[{
-            path:'add',
-            component:Add
-          }]
+          path: 'goods',
+          component: Goods,
+        },
+        {
+          path:'goods/add',
+          component:Add 
         }
       ]
 

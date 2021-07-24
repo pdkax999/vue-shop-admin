@@ -17,6 +17,7 @@ export default {
         if (!list) return
 
         this.categoryList = list
+       
         // this.processData(this.categoryList)
       } else {
         let result = await this.$API.reqGoodsCategorys(pagenum, pagesize)

@@ -16,10 +16,11 @@
           <span class="cate_text">选择商品分类:</span>
           <el-cascader
             ref="cascader"
+             expand-trigger="hover"
             v-model="value"
             :style="{winth:'40%'}"
             :options="categoryList"
-            :props="{ expandTrigger: 'hover',label:`cat_name`,value: 'cat_id'}"
+            :props="{label:`cat_name`,value: 'cat_id'}"
             @change="handleChange"
           ></el-cascader>
         </el-col>
@@ -67,7 +68,6 @@ export default {
         this.value = []
         return
       }
-
       const { value, activeName } = this
       let reslut = await this.$API.reqParamsList(value[value.length - 1], [
         activeName

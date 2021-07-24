@@ -54,9 +54,6 @@ export const  reqGoodsCategorys =(pagenum,pagesize)=> myAxios.get('/categories',
 
 // export const  reqDeleteCate =(id,attrid)=> myAxios.get(`/categories/${id}/attributes/${attrid}`);
 
-
-
-
 export const  reqAddParams =(id,attr_name, attr_sel)=> myAxios.post(`/categories/${id}/attributes`,{attr_name, attr_sel});
 
 export const  reqUpdateParams =(id,attrId,attr_name, attr_sel,attr_vals)=> myAxios.put(`/categories/${id}/attributes/${attrId}`,{attr_name, attr_sel,attr_vals});
@@ -67,3 +64,4 @@ export const reqGoodsList =(pagenum,pagesize,query)=> myAxios.get('/goods',{
     query,pagenum,pagesize
   }
 })
+export const reqAddGoods =(dataobj)=> myAxios.post('/goods',dataobj)

@@ -160,6 +160,8 @@ export default {
     updataUsers() {
       //'add' 新增 'update' 修改
       this.$refs.form.validate(async isSuccess => {
+        console.log(this.form,this.validateStore);
+        
         if (!isSuccess) return
         let result
 
@@ -297,7 +299,8 @@ export default {
         ],
         email: [{ validator: validateEmail, trigger: 'blur' }],
         phone: [{ validator: validatePhone, trigger: 'blur' }]
-      }
+      },
+      validateStore:{}
     }
   }
 }

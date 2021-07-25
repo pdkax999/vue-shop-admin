@@ -14,6 +14,8 @@ export const  reqUpdateUserRole =(id,rid)=> myAxios.put(`users/${id}/role`,{rid
 
 export const  reqRoleList =()=> myAxios.get('roles');
 
+export const  reqChatedata =()=> myAxios.get('reports/type/1');
+
 export const  reqRightsList =(type)=> myAxios.get('rights/'+type);
 
 export const  reqDeleteUser =(id)=> myAxios.delete(`users/${id}`);
@@ -51,6 +53,15 @@ export const  reqGoodsCategorys =(pagenum,pagesize)=> myAxios.get('/categories',
   }
 
 });
+export const  reqOrderList =(pagenum,pagesize,query)=> myAxios.get('/orders',{
+
+  params:{
+    query,
+    pagenum,
+    pagesize
+  }
+
+});
 
 // export const  reqDeleteCate =(id,attrid)=> myAxios.get(`/categories/${id}/attributes/${attrid}`);
 
@@ -64,4 +75,6 @@ export const reqGoodsList =(pagenum,pagesize,query)=> myAxios.get('/goods',{
     query,pagenum,pagesize
   }
 })
+export const reqAddressInfo =(id)=> myAxios.get(`/kuaidi/${id}`)
 export const reqAddGoods =(dataobj)=> myAxios.post('/goods',dataobj)
+
